@@ -1,0 +1,159 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color:#071123;
+}
+main{
+    text-align: center;
+    align-items: center;
+}
+.home-h1{   
+    color:rgb(42 195 255);
+   	border: 2px solid rgb(42 195 255);
+    padding: 15px;
+    display: inline-block;
+}
+h1{
+    margin-bottom: 15px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.home-p{ 
+    font-size: 22px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+    padding-bottom: 5px;
+    color: rgb(215, 177, 5);  
+}
+form{
+   padding: 30px;
+}
+#home-form label{
+    display: block;
+    padding-right: 50px;
+    margin-right: 50px;
+    font-weight: 600;
+    font-size: 28px;
+    color:white;
+}
+#name{
+    padding: 16px 72px;
+    font-size: 22px;
+    margin: 4px 2px;   
+    border: none;
+    border-radius: 4px;
+    background-color:rgb(234 240 248);
+}
+.sub-btn{
+    background-color: rgb(42 195 255);
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 22px;
+}
+.sub-btn:hover{
+    border: #0c0503 solid 1px;
+    background:rgb(22, 144, 192);
+    animation: bounce 1s;
+}
+
+.PF-h1{
+    color:rgb(42 195 255);
+    padding: 15px;
+    border: 2px solid rgb(42 195 255);
+    display: inline-block;
+    width: 20%;
+}
+.PF-h2{
+    color:white;
+    padding: 15px;
+    display: inline-flex;
+    margin-right: 27%;
+    width: 50%;
+}
+.PF-ul{
+     color: white;
+}
+.PF-a{
+    color: beige;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 700;    
+    padding: 10px;
+    background-color: rgb(206, 225, 225);
+    color: black;
+}
+li{
+    text-align: left;
+    font-size: 20px;
+    margin-left: 50px;
+}
+.li-a{
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+.li-a:hover{
+    color: aqua;
+}
+.li-a::after{
+    color: rgb(0, 4, 255);
+}
+.FB-h2{
+    color:white;
+    padding: 20px;    
+}
+h2{
+    margin: 15px;
+}
+dl {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    border: solid #666;
+    border-width: 1px 1px 0 0;
+}
+dt {
+    flex-basis: 35%;
+    padding: 5px 4px;
+    background: #666;
+    text-align: left;
+    color: #fff;
+}
+dd {
+    flex-basis: 55%;
+    flex-grow: 1;
+    margin: 0;
+    padding: 5px 4px;
+    border-bottom: 1px solid #666;
+}
+.dl-inline{
+    font-size: 23px;
+    color: white;
+    margin-inline: auto;
+}
+.dl-inline dt {
+    float: left;
+    clear: left;
+    padding-left: 30px;
+}
+.dl-inline dd {
+    margin-left: 0px;
+    text-align: left;
+    padding-left: 10px;
+}
+.not-found{
+    margin: 23% 0;
+    font-size: 30px;
+    color: red;
+}
+.error{
+    margin: 20% 0;
+    font-size: 30px;
+    color: white;
+}
+
+  
