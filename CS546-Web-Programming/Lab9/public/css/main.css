@@ -1,0 +1,84 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background-color:#071123;
+    text-align: center;
+}
+h1{
+    margin-bottom: 15px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color:rgb(42 195 255);
+    padding: 15px;
+    border: 2px solid rgb(42 195 255);
+    display: inline-block;
+    width: 50%;
+}
+form{
+    padding: 30px;
+}
+#static-form label{
+    display: block;
+    padding-right: 50px;
+    margin-right: 50px;
+    font-weight: 600;
+    font-size: 28px;
+    color:white;
+}
+#Values{
+    padding: 16px 12px;
+    font-size: 22px;
+    margin: 4px 2px;   
+    width: 400px;
+    border: none;
+    border-radius: 4px;
+    background-color:rgb(234 240 248);
+}
+.sub-btn{
+    background-color: rgb(42 195 255);
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 22px;
+}
+.sub-btn:hover{
+    border: #0c0503 solid 1px;
+    background:rgb(22, 144, 192);
+    animation: bounce 1s;
+}
+
+.is-green{
+  color:#00E676 ;  
+}
+.is-red{
+    color:#FF3D00 ;
+}
+footer {    
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+}
+footer p{
+    color: white;
+    font-size: 21px ;
+}
+#error-p{
+    color: red;
+    font-size: 20px;
+    font-weight: 500;
+}
+ul{
+    display: inline-block;
+    text-align: left;
+    font-size: 20px;
+}
+li{
+    text-align: center;
+    list-style-type: circle;
+    margin-top: 10px;
+}

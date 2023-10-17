@@ -1,0 +1,16 @@
+{
+  "name": "cs-546-lab-9",
+  "version": "1.0.0",
+  "description": "My lab 9 module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Shuchi Mehta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6"
+  }
+}

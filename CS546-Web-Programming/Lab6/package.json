@@ -1,0 +1,18 @@
+{
+  "name": "cs-546-lab-6",
+  "version": "1.0.0",
+  "description": "My lab 6 module",
+  "main": "app.js",
+  "scripts": {
+    "seed": "node ./tasks/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Shuchi Mehta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "mongodb": "^4.11.0"
+  }
+}
