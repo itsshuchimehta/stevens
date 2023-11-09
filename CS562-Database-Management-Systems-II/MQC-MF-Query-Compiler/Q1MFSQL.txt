@@ -1,0 +1,30 @@
+SQL:MF
+select cust, avg(x.quant), avg(y.quant), avg(z.quant)
+from sales
+group by cust; x, y, z
+such that x.cust = cust and x.state = "NY",
+y.cust = cust and y.state = "CT",
+z.cust = cust and z.state = "NJ"
+having avg(x.quant) > avg(y.quant) and avg(x.quant) > avg(z.quant)
+
+SQL:
+with x as (
+	select cust, quant
+	from sales
+	where state = 'NY'
+	
+),y as (
+	select cust, quant
+	from sales
+	where state = 'CT'
+	
+),z as (
+	select cust, quant
+	from sales
+	where state = 'NJ'
+)
+select s.cust,avg(x.quant) avg_NY,avg(y.quant) avg_CT,avg(z.quant) avg_NJ
+from sales s,x,y,z
+where x.cust = s.cust and z.cust = s.cust and y.cust = s.cust 
+Group by s.cust
+having avg(x.quant) > avg(y.quant) and avg(x.quant) > avg(z.quant)

@@ -1,0 +1,23 @@
+MF:
+SELECT prod, year, sum(1.quant), avg(2.quant)
+FROM sales
+GROUP BY prod, year : 1,2
+such that 1.prod = prod and 1.year = year
+		  2.prod = prod
+Having 1_sum_quant > 0.25 * 2_avg_quant
+
+
+SQL:
+With Q1 AS (
+	Select prod, year, sum(quant) AS x_sum_quant
+	FROM sales
+	group by prod, year
+), Q2 AS (
+	Select prod,avg(quant) y_avg_quant
+	FROM sales
+	group by prod
+)
+Select s.prod, s.year,Q1.x_sum_quant,Q2.y_avg_quant
+FROM sales s,Q1,Q2
+WHERE s.prod = Q1.prod and s.year = Q1.year and s.prod = Q2.prod 
+and Q1.x_sum_quant > 0.25 * Q2.y_avg_quant

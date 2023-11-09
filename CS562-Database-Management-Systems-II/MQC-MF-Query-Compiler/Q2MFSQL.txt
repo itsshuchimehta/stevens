@@ -1,0 +1,21 @@
+MF:
+select prod, month, sum(x.quant) / sum(y.quant)
+from sales
+group by prod, month; x, y
+such that x.prod = prod and x.month = month,
+y.prod = prod
+
+SQL:
+With Q1 AS (
+	Select prod, month, sum(quant) AS x_sum_quant
+	FROM sales
+	group by prod, month
+), Q2 AS (
+	Select prod,sum(quant) y_sum_quant
+	FROM sales
+	group by prod
+)
+
+Select s.prod, s.month, CAST(Q1.x_sum_quant as float)/CAST(Q2.y_sum_quant AS float) AS per
+FROM sales s,Q1,Q2
+WHERE s.prod = Q1.prod and s.month = Q1.month and s.prod = Q2.prod 

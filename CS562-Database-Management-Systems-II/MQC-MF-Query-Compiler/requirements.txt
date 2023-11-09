@@ -1,0 +1,7 @@
+postgresql
+subprocess
+psycopg2
+PrettyTable
+Python = 3.8
+
+"use pip/pip3 install"
