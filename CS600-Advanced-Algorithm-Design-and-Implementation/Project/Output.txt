@@ -1,0 +1,64 @@
+
+Welcome to Shuchi's Search Engine!
+
+search >>> l
+Bear - Wikipedia.html
+Bull - Wikipedia.html
+Sell - Wikipedia.html
+
+
+search >>> bear
+Bear - Wikipedia.html
+input2.html
+input3.html
+Stock - Wikipedia.html
+Bell - Wikipedia.html
+
+
+search >>> bele=
+None
+
+search >>> 
+None
+
+search >>> bs sd
+None
+
+search >>> bell
+Bell - Wikipedia.html
+Bear - Wikipedia.html
+input2.html
+input3.html
+
+
+search >>> bell bear
+None
+
+search >>> ls
+None
+
+search >>> m
+Bear - Wikipedia.html
+Dormouse - Wikipedia.html
+Bull - Wikipedia.html
+
+
+search >>> k
+Bear - Wikipedia.html
+Dormouse - Wikipedia.html
+
+
+search >>> none
+None
+
+search >>> my
+None
+
+search >>> an
+None
+
+search >>> the
+None
+
+search >>> ourselves
+None
