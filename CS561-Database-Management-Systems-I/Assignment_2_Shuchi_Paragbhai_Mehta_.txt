@@ -1,0 +1,168 @@
+/* SHUCHI PARAGBHAI MEHTA CWID: 20009083 */
+
+/*-------------------------- QUERY 1 -------------------------------*/
+
+WITH Main As(
+	SELECT cust,prod,month,ROUND(AVG(quant)) AS AVG_Q
+	FROM sales
+	GROUP BY cust,prod,month
+	ORDER BY cust,month
+),
+Q2 AS (
+	SELECT S.cust,S.prod,m.month,ROUND(AVG(s.quant)) AS Prev_AVG_QTY
+	FROM Main m,sales s
+	WHERE m.month > 1 AND m.month < 12  AND s.month = m.month-1
+ 	GROUP BY S.cust,S.prod,m.month
+ 	ORDER BY cust,month
+ ),
+Q3 AS (
+	SELECT S.cust,S.prod,m.month,ROUND(AVG(s.quant)) AS Follow_AVG_QTY
+	FROM Main m,sales s
+	WHERE m.month > 1 AND m.month < 12 AND s.month = m.month+1
+ 	GROUP BY S.cust,S.prod,m.month
+ 	ORDER BY cust,month
+ ),
+Q4 AS(
+ 	SELECT S.cust, S.prod, S.month,COUNT(S.cust) AS AVG_COUNT
+	FROM sales S,Q3,Q2	
+	WHERE  S.cust=Q2.cust AND S.prod=Q2.prod
+		AND S.month = Q2.month 
+		AND Q2.month = Q3.month AND Q2.cust=Q3.cust AND Q3.prod=Q2.prod
+ 		AND (S.quant BETWEEN Q2.Prev_AVG_QTY AND Q3.Follow_AVG_QTY OR S.quant BETWEEN Q3.Follow_AVG_QTY AND Q2.Prev_AVG_QTY)
+	GROUP BY S.cust, S.prod, S.month
+	ORDER BY S.cust,S.month
+ )
+SELECT m.cust AS "CUSTOMER",m.prod AS "PRODUCT",m.month AS "MONTH",Q4.AVG_COUNT AS "SALES_COUNT_BETWEEN_AVG"
+FROM Main m LEFT JOIN Q4 ON m.cust=Q4.cust AND m.prod=Q4.prod AND m.month=Q4.month
+ORDER BY m.cust,m.month;
+
+
+/*-------------------------- QUERY 2 -------------------------------*/
+
+WITH Main AS(
+	SELECT cust,prod,month,ROUND(AVG(quant)) AS AVG_Q
+	FROM sales
+	GROUP BY cust,prod,month
+	ORDER BY cust,month 
+),
+Q1 AS(
+	SELECT S.cust,S.prod,m.month,ROUND(AVG(s.quant)) AS Prev_AVG_QTY
+	FROM Main m,sales s
+	WHERE m.month > 1  AND s.month = m.month-1 
+	GROUP BY S.cust,S.prod,m.month
+ 	ORDER BY cust,month
+),
+Q2 AS(
+	SELECT S.cust,S.prod,m.month,ROUND(AVG(s.quant)) AS Follow_AVG_QTY
+	FROM Main m,sales s
+	WHERE m.month < 12  AND s.month = m.month+1 
+	GROUP BY S.cust,S.prod,m.month
+ 	ORDER BY cust,month
+)
+SELECT m.cust AS "CUSTOMER",m.prod AS "PRODUCT",m.month AS "MONTH",Q1.Prev_AVG_QTY AS "BEFORE_AVG",m.AVG_Q AS "DURING_AVG",Q2.Follow_AVG_QTY AS "AFTER_AVG"
+FROM Main m LEFT JOIN Q1 ON m.cust=Q1.cust AND m.prod=Q1.prod AND m.month=Q1.month LEFT JOIN Q2 ON m.cust=Q2.cust AND m.prod=Q2.prod AND m.month=Q2.month
+ORDER BY m.cust;
+
+/*-------------------------- QUERY 3 -------------------------------*/
+
+
+WITH Q1 AS(
+	SELECT cust,prod,state,ROUND(AVG(quant)) AS PROD_AVG
+	FROM sales
+	GROUP BY cust,prod,state
+	ORDER BY cust,state 
+),
+Q2 AS(
+	SELECT Q1.cust,Q1.prod,Q1.state,ROUND(AVG(s.quant)) AS OTHER_CUST_AVG
+	FROM Q1,sales s
+ 	WHERE Q1.cust != S.cust AND Q1.prod = S.prod AND Q1.state = S.state
+	GROUP BY Q1.cust,Q1.prod,Q1.state
+ 	ORDER BY Q1.cust,Q1.prod,Q1.state
+),
+Q3 AS(
+	SELECT Q1.cust,Q1.prod,Q1.state,ROUND(AVG(s.quant)) AS OTHER_PROD_AVG
+	FROM Q1,sales s
+ 	WHERE Q1.prod != S.prod AND Q1.state = S.state AND Q1.cust = S.cust
+	GROUP BY Q1.cust,Q1.prod,Q1.state
+ 	ORDER BY Q1.cust,Q1.prod,Q1.state
+),
+Q4 AS(
+	SELECT Q1.cust,Q1.prod,Q1.state,ROUND(AVG(s.quant)) AS OTHER_STATE_AVG
+	FROM Q1,sales s
+ 	WHERE Q1.state != S.state AND Q1.prod = S.prod AND Q1.cust = S.cust
+	GROUP BY Q1.cust,Q1.prod,Q1.state
+ 	ORDER BY Q1.cust,Q1.prod,Q1.state
+)
+SELECT Q1.cust AS "CUSTOMER",Q1.prod AS "PRODUCT",Q1.state AS "STATE",Q1.PROD_AVG AS "PROD_AVG",
+	   Q2.OTHER_CUST_AVG AS "OTHER_CUST_AVG",Q3.OTHER_PROD_AVG AS "OTHER_PROD_AVG",Q4.OTHER_STATE_AVG AS "OTHER_STATE_AVG"
+FROM Q1 LEFT JOIN Q2 ON Q1.cust=Q2.cust AND Q1.prod=Q2.prod AND Q1.state=Q2.state
+		LEFT JOIN Q3 ON Q1.cust=Q3.cust AND Q1.prod=Q3.prod AND Q1.state=Q3.state
+		LEFT JOIN Q4 ON Q1.cust=Q4.cust AND Q1.prod=Q4.prod AND Q1.state=Q4.state
+ORDER BY Q1.cust;
+
+
+/*-------------------------- QUERY 4 -------------------------------*/
+
+
+WITH MAIN AS (
+	SELECT cust,MAX(quant) AS FirstHighest
+	FROM sales
+	WHERE state = 'NJ'
+	GROUP BY cust
+	ORDER BY cust	
+),
+Q1 AS (
+ 	SELECT S.cust,MAX(S.quant) AS SecondHighest
+ 	FROM sales S, MAIN M
+   	WHERE S.quant !=  M.FirstHighest AND S.cust = M.cust AND state = 'NJ'
+ 	GROUP BY S.cust
+ 	ORDER BY cust
+ ),
+ Q2 AS (
+ 	SELECT S.cust,MAX(S.quant) AS ThirdHighest
+ 	FROM sales S, MAIN M, Q1
+    	WHERE S.quant !=  M.FirstHighest AND S.quant !=  Q1.SecondHighest AND state = 'NJ'
+ 	AND S.cust = M.cust AND S.cust = Q1.cust
+ 	GROUP BY S.cust
+ 	ORDER BY cust
+	
+)
+SELECT S.cust AS "CUSTOMER",S.quant AS "QUANTITY",S.prod AS "PRODUCT",S.date AS "DATE"
+FROM sales S,Q1,Q2,MAIN M
+WHERE S.state ='NJ' AND S.cust = M.cust AND S.cust = Q1.cust AND S.cust = Q2.cust AND (S.quant = M.FirstHighest OR S.quant = Q1.SecondHighest OR S.quant = Q2.ThirdHighest)
+ORDER BY S.cust ASC, S.quant Desc;
+
+/*-------------------------- QUERY 5 -------------------------------*/
+
+
+WITH EACH_MONTH AS(
+	SELECT cust,prod,month,ROUND(SUM(quant),0) AS TOTAL_Q
+	FROM sales
+	GROUP BY cust,prod,month
+	ORDER BY cust,month
+),
+PROD_TOTAL_Q AS(
+	SELECT Q1.cust,Q1.prod,SUM(Q1.TOTAL_Q) AS TOTAL_QTY
+	FROM EACH_MONTH Q1
+	GROUP BY Q1.cust,Q1.prod
+	ORDER BY Q1.cust,Q1.prod
+),
+SUM_OF_TOTAL_Q AS(
+	SELECT Q1.cust,Q1.prod,Q1.month,SUM(Q2.TOTAL_Q) AS SUM_OF_MONTHS
+	FROM EACH_MONTH Q1 LEFT JOIN EACH_MONTH AS Q2 ON Q1.cust = Q2.cust AND Q1.prod = Q2.prod AND Q2.month <= Q1.month
+	GROUP BY Q1.cust,Q1.prod,Q1.month
+	ORDER BY Q1.cust,Q1.prod,Q1.month
+),
+FINAL_MONTHS AS(
+	SELECT Q3.cust,Q3.prod,Q3.month
+	FROM SUM_OF_TOTAL_Q Q3,PROD_TOTAL_Q Q2 
+	WHERE Q3.cust = Q2.cust AND Q3.prod = Q2.prod AND Q3.SUM_OF_MONTHS <= ROUND(Q2.TOTAL_QTY * 1/3 ,0)
+	GROUP BY Q3.cust,Q3.prod,Q3.month
+	ORDER BY Q3.cust,Q3.prod	
+)
+ SELECT cust AS "CUSTOMER",prod AS "PRODUCT", MAX(month) AS "1/3 PURCHASED BY MONTH" 
+ FROM FINAL_MONTHS
+ GROUP BY cust,prod
+ ORDER BY cust,prod;
+
+
