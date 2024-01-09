@@ -1,0 +1,49 @@
+<form id="AddSubscriptionForm" name="AddSubscriptionForm" action="/admin/AddSubscription" method="post">
+    <div class="container rounded bg-white mt-5 mb-5">
+        {{#if hasErrors}}
+        <div class="error"> {{error}}</div>
+        {{/if}}
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Add New Subscription Plan</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels" for="name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Name">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="labels" for="duration">Duration</label>
+                            <input type="text" id="duration" name="duration" class="form-control"
+                                placeholder="Duration">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="labels" for="price">Price</label>
+                            <input type="number" id="price" name="price" class="form-control" placeholder="Price">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels" for="description">description</label>
+
+                            <textarea name="description" id="description" class="form-control" cols="30"
+                                rows="10"></textarea>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

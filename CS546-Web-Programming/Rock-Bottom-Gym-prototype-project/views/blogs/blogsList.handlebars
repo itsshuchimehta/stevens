@@ -1,0 +1,9 @@
+<section class="vh-100 bg-image mt-5" style="
+    background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Others/images/76.webp')
+  ">
+  <ul class="list-group mt-5">
+    {{#each blogs}}
+    <li class="list-group-item mt-5"><a href="/blogs/{{this._id}}">{{this.blog_name}}</a></li>
+    {{/each}}
+  </ul>
+</section>

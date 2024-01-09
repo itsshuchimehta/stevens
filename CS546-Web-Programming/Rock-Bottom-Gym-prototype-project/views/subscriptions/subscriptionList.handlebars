@@ -1,0 +1,8 @@
+<div class="container mt-5">
+    <h3>Subscription List</h3>
+    <ol style="list-style: decimal;">
+        {{#each result}}
+        <li style=""> Plan: {{this.name}} Duration: {{this.date}} - {{this.end_date}} Amount: {{this.final_amount}}</li>
+        {{/each}}
+    </ol>
+</div>

@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="row  mt-5">
+        <div class="col-12 mt-5 subscription-page">User Details</div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">First Name: <span id="firstname">
+                {{userInfo.firstname}} </span>
+        </div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Last Name: <span
+                id="lastname">{{userInfo.lastname}}</span></div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Gender: <span id="gender">{{userInfo.gender}}</span>
+        </div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">DOB: <span id="dob">{{userInfo.dob}}</span></div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Cell Number: <span id="cell">{{userInfo.cell}}</span>
+        </div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Email: <span id="Email">{{userInfo.email}}</span></div>
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Address: <span id="Address">{{userInfo.address}}</span>
+        </div>
+
+        <div class="col-sm-12 col-md-6 mt-5 subscription-page">Plans:
+            <select id="plan" name="plan">
+                <option value="select-plan">Select Plan</option>
+                {{#each subscriptionInfo}}
+                <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-4 mt-5 subscription-page">
+            Actual Price: $<span id="actual-price"></span>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-5 subscription-page">
+            Discount Price: $
+            <span id="discount-price"></span>
+        </div>
+
+        <div class="col-sm-12 col-md-4 mt-5 subscription-page">
+            Final Price: $
+            <span id="final-price"></span>
+        </div>
+
+        <button type="button" class="btn btn-danger mt-5 btn-lg" id="buysubscription">Buy Subscription now </button>
+    </div>
+</div>
+
+{{!-- {{#if subscriptionInfo.length}}
+
+{{#each subscriptionInfo}}
+<h6>{{this.name}}</h6>
+<h6>{{this.description}}</h6>
+<h6>{{this.price}}</h6>
+<h6>{{this.duration}}</h6>
+
+{{/each}}
+
+{{/if}} --}}

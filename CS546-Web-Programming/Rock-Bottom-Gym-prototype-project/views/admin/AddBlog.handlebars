@@ -1,0 +1,54 @@
+<form id="BlogForm" name="BlogForm" action="/admin/AddBlog" method="post">
+    <div class="container rounded bg-white mt-5 mb-5">
+        {{#if hasErrors}}
+        <div class="error"> {{error}}</div>
+        {{/if}}
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Add New Blog</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels" for="blogname">Blog Title</label>
+                            <input type="text" id="blogname" name="blogname" class="form-control"
+                                placeholder="Blog Name">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="labels" for="blogcategory">Blog Category</label>
+                            <select id="blogcategory" name="blogcategory" class="form-select form-control">
+                                <option value="">Select Blog Category</option>
+                                {{#each formdata}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels" for="blogdesc">Blog Description</label>
+
+                            <textarea name="blogdesc" id="blogdesc" class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+
+
+                    </div>
+                    {{!-- <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Country</label>
+                            <input type="text" class="form-control" placeholder="country" value="">
+                        </div>
+                        <div class="col-md-6"><label class="labels">State/Region</label>
+                            <input type="text" class="form-control" value="" placeholder="state">
+                        </div>
+                    </div> --}}
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Save
+                            Blog</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

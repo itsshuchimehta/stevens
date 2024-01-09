@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.css" />
+
+  <link rel="stylesheet" href="/public/css/main.css" />
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  {{#if dashHeader}}
+  <!-- Custom fonts for this template-->
+  <link href="/public/css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/public/css/dashboard.min.css" rel="stylesheet">
+  {{/if}}
+  {{#if Err404}}
+  <!-- Custom fonts for this template-->
+  <link href="/public/css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/public/css/dashboard.min.css" rel="stylesheet">
+  {{/if}}
+</head>
+
+<body>
+  {{#if user_header}}
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="/" class="logo">RockBottom</a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
+              <li class="scroll-to-section"><a href="/subscriptions">Buy Subscriptions</a></li>
+              <li class="scroll-to-section"><a href="/products">Products</a></li>
+              <li class="scroll-to-section"><a href="/blogs">Blogs</a></li>
+              <li>
+                <a href="/cart">My Cart</a>
+              </li>
+              {{#if NotloggedIn}}
+              <li class="main-button"><a href="/login">Sign Up / Login</a></li>
+              {{/if}}
+
+              {{#if loggedIn}}
+              <li>
+                <a href="/dashboard">Hello, {{UserFullname}}</a>
+              </li>
+              {{/if}}
+
+            </ul>
+            <a class="menu-trigger">
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  {{/if}}
+  {{#if dashHeader}}
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+
+      <!-- <div class="sidebar-brand-text mx-3"> -->
+      <li><a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+          RockBottom</a></li>
+      <!-- </div> -->
+      <!-- Divider  -->
+
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <!--  <hr class="sidebar-divider"> -->
+
+      {{!--
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div> --}}
+      {{#if adminUsergroup}}
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-history"></i>
+          <span>Administrator</span>
+        </a>
+        <div id="collapseTwo" class="collapse" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            {{!-- <h6 class="collapse-header">Custom Components:</h6> --}}
+            <a class="collapse-item" href="/admin/AddProduct">Product</a>
+            <a class="collapse-item" href="/admin/AddBlog">Blog</a>
+            <a class="collapse-item" href="/admin/AddSubscription">Subscriptions</a>
+          </div>
+        </div>
+      </li>
+      {{/if}}
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-history"></i>
+          <span>My Orders</span>
+        </a>
+        <div id="collapseTwo" class="collapse" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/subscriptions/history">Subscription History</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider my-0">  -->
+
+      <!-- Nav Item - Buy Subscriptions -->
+      <li class="nav-item">
+        <a class="nav-link" href="/subscriptions">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Buy Subscriptions</span></a>
+      </li>
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider my-0">  -->
+
+      <!-- Nav Item - Products -->
+      <li class="nav-item">
+        <a class="nav-link" href="/products">
+          <i class="fas fa-fw fa-shopping-bag"></i>
+          <span>Products</span></a>
+      </li>
+      <!-- Divider -->
+      <!--  <hr class="sidebar-divider my-0"> -->
+
+      <!-- Nav Item - blogs -->
+      <li class="nav-item">
+        <a class="nav-link" href="/blogs">
+          <i class="fas fa-fw fa-th"></i>
+          <span>Blogs</span></a>
+      </li>
+      <!-- Divider -->
+      <!--  <hr class="sidebar-divider my-0"> -->
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">
+          <i class="fas fa-fw fa-shopping-cart"></i>
+          <span>My Cart</span></a>
+      </li>
+
+
+
+
+
+
+
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      {{!-- <div class="text-center d-none d-md-inline"> --}}
+
+        <li><button class="rounded-circle border-0" id="sidebarToggle"></button></li>
+        {{!--
+      </div> --}}
+
+    </ul>
+
+
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{UserFullname}}</span>
+                <img class="img-profile rounded-circle" src="/public/images/UserProfile/{{profileimage}}"
+                  alt="profile image">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="UserProfile">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+        {{/if}}
+
+        <main>
+          {{{body}}}
+        </main>
+
+        {{#if user_footer}}
+        <footer class="fix-footer-issue">
+          <div class=" container">
+            <div class="row">
+              <div class="col-lg-12">
+                <p>Copyright &copy; 2022 RockBottom - Designed by Group 21 Section A
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        {{/if}}
+        {{#if dashfooter}}
+        <footer class="fix-footer-issue">
+          <div class=" container">
+            <div class="row">
+              <div class="col-lg-12">
+                <p>Copyright &copy; 2022 RockBottom - Designed by Group 21 Section A
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Main Content -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  <!-- jQuery -->
+  <script src="/public/js/jquery-2.1.0.min.js"></script>
+
+  <script src="/public/js/jquery.validate.js"></script>
+
+  <script src="/public/js/jquery.validate.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="/public/js/popper.js"></script>
+  <script src="/public/js/bootstrap.min.js"></script>
+
+  <!-- Plugins -->
+  <script src="/public/js/scrollreveal.min.js"></script>
+  <script src="/public/js/waypoints.min.js"></script>
+  <script src="/public/js/jquery.counterup.min.js"></script>
+  <script src="/public/js/imgfix.min.js"></script>
+  <script src="/public/js/mixitup.js"></script>
+  <script src="/public/js/accordions.js"></script>
+
+  <!-- Global Init -->
+  <script src="/public/js/custom.js"></script>
+
+  <!--- Moment js -->
+  <script src="/public/js/moment.js"></script>
+  <!--- Datepicker js -->
+  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+  {{#if dashfooter}}
+  <!-- Custom scripts for all pages-->
+  <script src="/public/js/dashboard.min.js"></script>
+
+  <!-- Bootstrap core JavaScript-->
+
+
+  <script src="/public/js/vendor/jquery/jquery.min.js"></script>
+
+
+  <!-- Core plugin JavaScript-->
+
+  <script src="/public/js/vendor/jquery-easing/jquery.easing.min.js"></script>
+  {{/if}}
+</body>
+{{!--
+<script src="/public/js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
+
+</html>

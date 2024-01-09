@@ -1,0 +1,95 @@
+<!-- HEADING BREADCRUMB-->
+{{!-- <section class="bg-pentagon py-4">
+    <div class="container py-3">
+        <div class="row d-flex align-items-center gy-4">
+            <div class="col-md-7">
+                <h1 class="h2 mb-0 text-uppercase">Checkout - Order review</h1>
+            </div>
+            <div class="col-md-5">
+                <!-- Breadcrumb-->
+                <ol class="text-sm justify-content-start justify-content-lg-end mb-0 breadcrumb undefined">
+                    <li class="breadcrumb-item"><a class="text-uppercase" href="index.html">Home</a></li>
+                    <li class="breadcrumb-item text-uppercase active">Checkout - Order review </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section> --}}
+<!-- CHECKOUT STEP 4 SECTION-->
+<section class="py-5 h-100">
+
+    <div class="container py-5">
+        <div class="row d-flex align-items-center gy-4">
+            <div class="col-md-12">
+                <h1 class="h2 mb-0 text-uppercase">Checkout - Order review</h1>
+            </div>
+        </div>
+    </div>
+    <form action="/cart/PlaceOrder" id="PlaceOrder" name="PlaceOrder" method="post">
+        <div class="container py-2">
+            <div class="row gy-5">
+
+                <div class="col-lg-12">
+
+                    <div class="table-responsive">
+                        <table id="CartTable" name="CartTable" class="table text-nowrap">
+                            <thead>
+                                <tr class="text-sm">
+                                    <th class="border-gray-300 border-top py-3" colspan="2">Product</th>
+                                    <th class="border-gray-300 border-top py-3">Quantity</th>
+                                    <th class="border-gray-300 border-top py-3">Unit Price</th>
+                                    <th class="border-gray-300 border-top py-3">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{!-- {{#if hasErrors}} --}}
+                                {{#each cartdata.currentProduct}}
+
+                                {{!-- {{/if}} --}}
+                                <tr class="text-sm">
+                                    <td class="align-middle border-gray-300 py-3">
+                                        <a href="products/{{this.product_id}}">
+                                            <img class="img-fluid flex-shrink-0"
+                                                src="/public/images/product/{{this.product_img}}" alt="{{this.name}}"
+                                                style="min-width: 50px" width="50">
+                                        </a>
+                                    </td>
+                                    <td class="align-middle border-gray-300 py-3">
+                                        <a href="products/{{this.product_id}}">{{this.name}}</a>
+                                    </td>
+                                    <td class="align-middle border-gray-300 py-3">{{this.qty}}</td>
+                                    <td class="align-middle border-gray-300 py-3">${{this.price}} </td>
+                                    <td class="align-middle border-gray-300 py-3">${{this.TotalAmount}} <span
+                                            class="close" id="{{this._id}}">&#10005;</span></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="py-3 border-0" colspan="4"> <span
+                                            class="h5 text-gray-700 mb-0">Total</span>
+                                    </th>
+                                    <th class="py-3 border-0 text-end"> <span
+                                            class="h5 text-gray-700 mb-0">${{cartdata.totalPrice}}</span>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- NAVIAGTION FOOTER-->
+                    <div class="align-items-center bg-light px-4 py-3 text-center mb-5">
+                        <div class="row">
+                            {{!-- <div class="col-md-6 text-md-start py-1"><a class="btn btn-secondary my-1"
+                                    href="shop-checkout3.html"><i class="fas fa-angle-left me-1"></i> Back to payment
+                                    method</a></div> --}}
+                            <div class="col-md-12 text-md-end py-1">
+                                <button class="btn btn-primary my-1" type="submit">Place the order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</section>

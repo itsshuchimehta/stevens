@@ -1,0 +1,99 @@
+<section class="bg-image mt-5" style="
+    background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Others/images/76.webp');
+    background-repeat: repeat-y;
+  ">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 mt-5">
+                <div class="card">
+                    <form id="AddToCartForm" name="AddToCartForm" action="/cart/AddTocart" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="images p-3">
+                                    <div class="text-center p-4">
+                                        <img src="/public/images/product/{{product.product_img}}" width="250"
+                                            alt="Image of {{product.category}}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="product p-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <a href="/products"><i class="fa fa-long-arrow-left"></i>
+                                                <span class="ml-1 text-muted">All Products</span></a>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="HiddenProduct" name="HiddenProduct"
+                                        value="{{product._id}}">
+                                    <div class="mt-4 mb-3">
+                                        <h5 class="text-uppercase">{{product.name}}</h5>
+                                        <div class="price d-flex flex-row align-items-center"> <span
+                                                class="act-price">${{product.price}}</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 mb-3">
+                                        <p class="text-uppercase">Rating: <span>{{product.overallrating}}/5<i
+                                                    class="bi bi-star-fill"
+                                                    style="position:relative; left: 8px; top:-4px;"></i></span></p>
+                                    </div>
+                                    <p class="about">{{product.description}}</p>
+                                    <div class="sizes mt-2">
+                                        {{#if product.size.length}}
+                                        <h6 class="text-uppercase">Size</h6>
+                                        {{#each product.size}}
+                                        <input class="mx-2" type="radio" name="size" value="{{this}}" />
+                                        <span>{{this}}</span>
+                                        {{/each}}
+                                        {{/if}}
+                                    </div>
+
+                                    <p class="bt-1">Quantity</p>
+                                    <div>
+                                        <select id="quantity" name="quantity">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="cart mt-4 align-items-center">
+                                        <button id="AddToCart" name="AddToCart" type="submit"
+                                            class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 mx-auto ">
+        <h3 class="d-flex justify-content-center ">Comments posted by the Users who have purchased this product</h3>
+
+        {{#if comments.length}}
+        <div class="overflow-auto">
+
+
+            {{#each comments}}
+            <div class="col-12 mt-3">
+                <h5>Name: {{this.name}}</h5>
+            </div>
+            <div class="col-12 mt-3">
+                <h6>Comment: {{this.comment}}</h6>
+            </div>
+            <div class="col-6 d-flex-justify-content-center mt-3">
+                <i id="{{this.id}}-like" class="fa fa-thumbs-up fa-lg icon-background-color icon-pointer like"></i>
+                <i id="{{this.id}}-dislike"
+                    class="fa fa-thumbs-down fa-lg mx-3 icon-background-color icon-pointer dislike"></i>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</section>

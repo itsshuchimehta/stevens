@@ -1,0 +1,32 @@
+{
+  "name": "gym-website",
+  "version": "1.0.0",
+  "description": "CS 546 Section A Group 21 Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "seed": "node ./tasks/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshay-patade/Gym-Website.git"
+  },
+  "author": "Group 21",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshay-patade/Gym-Website/issues"
+  },
+  "homepage": "https://github.com/akshay-patade/Gym-Website#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "jquery": "^3.6.2",
+    "jquery-validation": "^1.19.5",
+    "moment": "^2.29.4",
+    "mongo": "^0.1.0",
+    "xss": "^1.0.14"
+  }
+}
