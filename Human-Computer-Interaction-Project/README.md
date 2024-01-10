@@ -9,7 +9,7 @@
 
 - This web app is a great tool for cinephiles to discover new movies and shows, share their opinions, and stay up to date on the latest releases.
 
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-link flex-shrink-0 mr-2">
+<svg height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-link flex-shrink-0 mr-2">
 
 ## Get Started Locally
 
