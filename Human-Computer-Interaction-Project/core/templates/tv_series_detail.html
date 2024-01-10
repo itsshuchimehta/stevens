@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}{% load humanize %}
+
+{% block title %} - TV Series Detail {% endblock %}
+
+{% block head %}
+
+
+{% endblock %}
+
+
+{% block body %}
+
+<style>
+    .movie-detail-card-bg {
+        background-image: url(https://image.tmdb.org/t/p/original{{series.backdrop_path}});
+        background-size: cover;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 10px;
+    }
+
+    .movie-detail-card {
+        background: rgba(0, 0, 0, 0.424);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    .img-fluid {
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container">
+    <section class="my-3 body">
+
+
+        <div class="movie-detail-card-bg">
+            <div class="movie-detail-card">
+
+                <div class="card-body text-light">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-3 mb-md-0">
+                            <img src=https://image.tmdb.org/t/p/original{{series.poster_path}} class="img-fluid"
+                                alt="{{series.title}}">
+                        </div>
+                        <div class="col-lg-8 col-md-6 col-sm-12">
+                            <div class="mb-3">
+                                <h2>
+                                    <a href="{{series.homepage}}" class="text-light">{{series.name}}</a>
+                                </h2>
+                            </div>
+                            <div class="mb-3">
+                                {% for i in series.genres %}
+                                <a href="{% url 'genre_content' i.id i.name %}" style="text-decoration: none;"
+                                    class="badge bg-primary">{{i.name}}</a>
+                                {% if not forloop.last %}&nbsp;{% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                <span>📜 Overview: </span>
+                                {{series.overview}}
+                            </div>
+                            <div class="mb-3">
+                                {% if series.budget %}
+                                <span class="">💵 Budget: USD </span>
+                                {{series.budget|intcomma}}
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <span class="">🌏 Languages Available: </span>
+                                {% for i in series.spoken_languages %}
+                                {{i.english_name}}
+                                {% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="mb-3">
+                                <span class="">📆 Date Released: </span>
+                                {{series.release_date}}
+                            </div>
+                            <div class="mb-3">
+                                {% if series.runtime %}
+                                <span class="">⌚ Running Time: </span>
+                                {{series.runtime}} mins
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="">⭐ Vote Average: </span>
+                                {{series.vote_average}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="my-5">
+
+        <div class="col-12">
+            <h2 class="display-4 mb-2">Beloved Cast</h2>
+        </div>
+
+        <div class="container">
+            <div class="row card">
+                <div class="list-group list-group-flush list-group-horizontal position-relative overflow-auto">
+                    {% for cast in credits %}
+                    <div class="list-group-item">
+                        <div class="card" style="width: 12rem;">
+                            {% if cast.profile_path %}
+                            <div class="">
+                                <img src=https://image.tmdb.org/t/p/w500{{cast.profile_path}} class="card-img-top "
+                                    alt="{{cast.name}} original image" style=" object-fit: cover; height:300px">
+                            </div>
+                            {% else %}
+                            <div class="">
+                                <img src=https://www.shutterstock.com/image-vector/male-default-placeholder-avatar-profile-260nw-387516193.jpg
+                                    class="card-img-top " alt="{{cast.name}} original image"
+                                    style="height: 300px ; object-fit: cover;">
+                            </div>
+                            {% endif %}
+                            <div class="py-1 text-center">
+                                <div class="fs-b">{{cast.character}}</div>
+                                <div class="text-muted">{{cast.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <div class="mb-3">
+
+        <section class="my-1">
+
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="display-4 mb-2">Similar TV Series</h2>
+                </div>
+            </div>
+
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4 justify-content-center">
+                {% for item in similar %}
+                <div class="col mb-2">
+                    <!-- Movie Card -->
+                    <div class="card h-100 border-0">
+                        <a href="{% url 'series_details' item.id %}">
+                            <div class="position-relative">
+                                {% if item.poster_path %}
+                                <img src=https://image.tmdb.org/t/p/w500{{item.poster_path}}
+                                    class="card-img-top rounded-3 shadow" alt="{{item.name}}"
+                                    style="height: 300px; object-fit: cover;" />
+                                {% else %}
+                                <img src="{% static 'img/placeholder.png' %}" class="card-img-top rounded-3 shadow"
+                                    alt="{{item.name}}" style="height: 300px; object-fit: cover;" />
+                                {% endif %}
+                                <div class="position-absolute top-0 end-0 m-2">
+                                    <span class="badge badge-custom">
+                                        <i class="bi bi-star-fill"></i>
+                                        {{ item.vote_average }}
+                                    </span>
+                                </div>
+                                <div class="tooltip-body d-none">
+                                    <div>
+                                        <div>
+                                            <div class="">
+                                                <h6>Movie Name: {{item.title}}</h6>
+                                            </div>
+                                            <div>
+                                                <span class="">
+                                                    <h6>Release Date : 🕔
+                                                        {{item.release_date}}
+                                                    </h6>
+                                                </span>
+                                                {%if item.adult%}
+                                                <span class="badge bg-warning text-dark rounded-pill">+18 </span>
+                                                {%endif%}
+                                            </div>
+                                            <div class="">
+                                                <h6> Average Rating: {{item.vote_average}}</h6>
+                                            </div>
+                                            <div class="">
+                                                <h6> Genres: {% for i in item.genres %}
+                                                    {{i.name}}
+                                                    {% endfor %}
+                                                </h6>
+
+                                            </div>
+                                            <div class="">
+                                                <h6> Duration : {{item.runtime}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p class="text-light">
+                                                </h6>overview : {{item.overview|truncatewords:20}}</>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Movie Card -->
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </section>
+
+        <section class="trending-card my-4 p-4">
+            <h2>Comments ({{ comments | length }})</h2>
+
+            {% if user.is_authenticated %}
+            <ul class="list-group list-group-flush img-fluid">
+
+                <li class="list-group-item align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <span>
+                                    <span class="fw-bold my-1">Commenting as @{{user.username|capfirst}}</span>
+                                    <textarea name="body" rows="2" class="form-control"
+                                        placeholder="What do you think...?" required id="id_body"></textarea>
+                                    <div class="my-1 justify-content-center">
+                                        <button type="submit" class="btn btn-primary btn-sm">Post</button>
+                                    </div>
+
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                <div>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login to Comment</a>
+                </div>
+                {% endif %}
+
+
+                {% for comment in comments %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">
+                            <span>
+                                <img width="30" height="30"
+                                    src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-user-interface-kiranshastry-gradient-kiranshastry.png"
+                                    alt="external-user-interface-kiranshastry-gradient-kiranshastry" />
+                            </span>
+                            <span>
+                                {{ comment.user.username | capfirst }}
+                            </span>
+                        </div>
+                        <div>
+                            {{ comment.body }}
+                        </div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{ comment.date_created | naturaltime }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

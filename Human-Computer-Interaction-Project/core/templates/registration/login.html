@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}{% load humanize %}
+
+
+
+{% block title %} Login {% endblock %}
+
+{% block head %}
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+<section class="my-5 ">
+    <div class="container">
+        <div class="d-flex justify-content-center my-2">
+        <div class="col-lg-7 col-md-6 col-xl-6">
+    <div class="login-card">
+    <div class="card-body">
+        {% if user.is_authenticated %}
+        <h4 class="card-title">You are already logged in!</h4>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" type="button" class="btn btn-primary">Go Home</a>
+        </div>
+
+        {% else %}
+        <h4 class="card-title text-darkt">Hi! Let's get you authenticated!</h4>
+        <div class="container mt-2">
+            <div class="row align-items-center">
+                <div class="col">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-ouline mb-4">
+                            <label for="id_username" class="form-label text-dark">Username</label>
+                            <input type="username" name="username" class="form-control " autofocus
+                                placeholder="Enter your username" autocapitalize="none" autocomplete="username"
+                                maxlength="150" required id="id_username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label text-dark">Password</label>
+                            <input type="password" class="form-control" name="password" autocomplete="current-password"
+                                required id="id_password" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+
+{% endblock %}
