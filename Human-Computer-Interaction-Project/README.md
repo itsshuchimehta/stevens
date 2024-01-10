@@ -10,24 +10,11 @@
 - This web app is a great tool for cinephiles to discover new movies and shows, share their opinions, and stay up to date on the latest releases.
 
 
-## Core Team Members
-
-- [Aditya Agarwal](https://github.com/adiagarwalrock)
-- [Feneel Doshi](https://github.com/feneel)
-- [Pratik Parmar](https://github.com/pratik-parmar)
-- [Shuchi Mehta](https://github.com/itsshuchimehta)
-- [Surya Nediyedth](https://github.com/Surya7612)
-
-
 
 ## Get Started Locally
 
 
-1. Clone the Git repository:
-
-    ```
-    git clone https://github.com/adiagarwalrock/critiQs.git
-    ```
+1. Download the Zip:
 
 2. Create a virtual environment for the project:
 
