@@ -9,7 +9,10 @@
 
 - This web app is a great tool for cinephiles to discover new movies and shows, share their opinions, and stay up to date on the latest releases.
 
-<i class="far fa-link"></i>
+<i class="far fa-link"><a href="https://critiqs.vercel.app/">critiqs.vercel.app/</a></i>
+
+
+
 
 ## Get Started Locally
 
